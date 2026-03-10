@@ -1,0 +1,22 @@
+{
+    "todos": [
+        {
+            "id": "43fefd8d-4eb1-4c09-a23b-9204e1ca38ad",
+            "text": "fdgdfgf",
+            "completed": false
+        },
+        {
+            "id": "daee2490-3dfe-4891-88d9-57efdd89eb02",
+            "text": "dfdfd",
+            "completed": true
+        },
+        {
+            "id": "a66a024d-5557-42da-bd96-a38fa739ccd9",
+            "text": "dfdfdf",
+            "completed": false
+        }
+    ],
+    "utils": {
+        "filter": "all"
+    }
+}

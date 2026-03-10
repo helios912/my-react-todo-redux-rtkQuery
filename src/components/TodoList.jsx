@@ -1,16 +1,35 @@
 import TodoItem from './TodoItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetTodo, clearCompleted } from '../store/todosSlice';
+import {
+    useGetTodosQuery,
+    useAddTodoMutation,
+    useDeleteTodoMutation,
+    useGetUtilsQuery,
+    useUpdateFilterMutation,
+} from '../store/api/apiSlice.js';
 
 function TodoList() {
-    const todos = useSelector((state) => state.todos);
-    const filter = useSelector((state) => state.utils.filter);
+    const {
+        data: todos,
+        isLoading: todosLoading,
+        error: todosError,
+    } = useGetTodosQuery();
+    const {
+        data: utils,
+        isLoading: utilsLoading,
+        error: utilsError,
+    } = useGetUtilsQuery();
     const dispatch = useDispatch();
-    const filterTodos = todos.filter((item) => {
-        if (filter === 'active') return !item.completed;
-        if (filter === 'completed') return item.completed;
-        return true;
-    });
+    const filterTodos =
+        todos?.filter((item) => {
+            if (utils?.filter === 'active') return !item.completed;
+            if (utils?.filter === 'completed') return item.completed;
+            return true;
+        }) || [];
+
+    if (todosLoading || utilsLoading) return <p>Loading...</p>;
+    if (todosError || utilsError) return <p>Error loading data</p>;
 
     return (
         <>

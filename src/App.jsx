@@ -8,23 +8,36 @@ import './App.css';
 import { addTodo } from './store/todosSlice';
 import { updateFilter } from './store/utilsSlice';
 
+import {
+    useGetTodosQuery,
+    useAddTodoMutation,
+    useDeleteTodoMutation,
+    useGetUtilsQuery,
+    useUpdateFilterMutation,
+} from './store/api/apiSlice';
+
 function App() {
+    const { data: todos, isLoading, error } = useGetTodosQuery();
+    const [addTodo] = useAddTodoMutation();
     const [todoska, setTodoska] = useState('');
 
     const dispatch = useDispatch();
-    const todos = useSelector((state) => state.todos);
+    //const todos = useSelector((state) => state.todos);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
         if (!todoska.trim()) return;
-        dispatch(addTodo({ id: uuidv4(), text: todoska, completed: false }));
+        addTodo({ id: uuidv4(), text: todoska, completed: false });
         setTodoska('');
     };
 
-    const complitedTodos = todos.filter((item) => item.completed !== true);
+    const complitedTodos = todos?.filter((item) => item.completed !== true);
 
-    const todoCount = complitedTodos.length;
+    const todoCount = complitedTodos?.length;
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error loading books</p>;
 
     return (
         <>

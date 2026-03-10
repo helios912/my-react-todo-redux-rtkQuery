@@ -1,0 +1,92 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+body {
+    background-color: rgb(25, 75, 212);
+    color: white;
+    place-items: botom;
+}
+form {
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+form input {
+    width: 60%;
+    font-size: 18px;
+    padding: 5px;
+}
+form input:hover {
+    background-color: rgb(247, 247, 201);
+}
+form button {
+    font-size: 16px;
+    transition: background-color 0.5;
+}
+form button:hover {
+    color: rgb(25, 75, 212);
+    background-color: yellow;
+}
+.todo-list__title {
+    font-size: 30px;
+}
+.todo-list__item {
+    text-align: left;
+    font-size: 20px;
+    border-radius: 10px;
+
+    padding: 5px 10px;
+    border: 1px solid white;
+    margin-top: 10px;
+}
+.todo-list__item:hover {
+    background-color: rgb(57, 150, 226);
+    color: black;
+}
+.todo-list__items {
+    list-style: none;
+}
+.todo-item__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.todo-item__container div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter-btn_container,
+.filter-btn__container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+.filter-btn_container,
+.filter-btn__container button {
+    outline: none;
+}
+.filter-btn_container button:hover {
+    background-color: yellow;
+    color: rgb(57, 150, 226);
+}
+.filter-btn__container button:hover {
+    background-color: yellow;
+    color: rgb(57, 150, 226);
+}
+
+.filter-btn_container button:active {
+    color: yellow;
+    background-color: rgb(57, 150, 226);
+}
+.filter-btn__container button:active {
+    color: yellow;
+    background-color: rgb(57, 150, 226);
+}

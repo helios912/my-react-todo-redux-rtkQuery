@@ -31,9 +31,6 @@ function App() {
     const [todoska, setTodoska] = useState('');
     const [updateFilter] = useUpdateFilterMutation();
 
-    const dispatch = useDispatch();
-    //const todos = useSelector((state) => state.todos);
-
     const handleFormSubmit = (e) => {
         e.preventDefault();
 

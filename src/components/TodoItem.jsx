@@ -4,8 +4,17 @@ import { FcFullTrash } from 'react-icons/fc';
 import { FcExport } from 'react-icons/fc';
 import { useSelector, useDispatch } from 'react-redux';
 import { delTodo, toggleTodo } from '../store/todosSlice';
+import {
+    useGetTodosQuery,
+    useAddTodoMutation,
+    useDeleteTodoMutation,
+    useGetUtilsQuery,
+    useUpdateFilterMutation,
+} from '../store/api/apiSlice.js';
+
 function TodoItem({ todo }) {
     const dispatch = useDispatch();
+    const [deleteTodo] = useDeleteTodoMutation();
 
     return (
         <li className="todo-list__item">
@@ -28,7 +37,7 @@ function TodoItem({ todo }) {
                     )}
 
                     <FcFullTrash
-                        onClick={() => dispatch(delTodo(todo.id))}
+                        onClick={() => deleteTodo(todo.id)}
                         style={{ fontSize: 35, paddingRight: 10 }}
                     />
                 </div>

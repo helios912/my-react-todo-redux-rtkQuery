@@ -36,6 +36,13 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['Todos'], // оновлює список
         }),
+        updateTodo: builder.mutation({
+            query: (id) => ({
+                url: `todos/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Todos'], // оновлює список
+        }),
         // ------ Utils -------
         getUtils: builder.query({
             query: () => 'utils',

@@ -17,9 +17,19 @@ import {
 } from './store/api/apiSlice';
 
 function App() {
-    const { data: todos, isLoading, error } = useGetTodosQuery();
+    const {
+        data: todos,
+        isLoading: todosLoading,
+        error: todosError,
+    } = useGetTodosQuery();
+    const {
+        data: utils,
+        isLoading: utilsLoading,
+        error: utilsError,
+    } = useGetUtilsQuery();
     const [addTodo] = useAddTodoMutation();
     const [todoska, setTodoska] = useState('');
+    const [updateFilter] = useUpdateFilterMutation();
 
     const dispatch = useDispatch();
     //const todos = useSelector((state) => state.todos);
@@ -36,8 +46,8 @@ function App() {
 
     const todoCount = complitedTodos?.length;
 
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading books</p>;
+    if (todosLoading || utilsLoading) return <p>Loading...</p>;
+    if (todosError || utilsError) return <p>Error loading data</p>;
 
     return (
         <>
@@ -53,13 +63,11 @@ function App() {
                     <button type="submit">Додати справу</button>
                 </form>
                 <div className="filter-btn_container">
-                    <button onClick={() => dispatch(updateFilter('all'))}>
-                        Всі
-                    </button>
-                    <button onClick={() => dispatch(updateFilter('active'))}>
+                    <button onClick={() => updateFilter('all')}>Всі</button>
+                    <button onClick={() => updateFilter('active')}>
                         Невиконані
                     </button>
-                    <button onClick={() => dispatch(updateFilter('completed'))}>
+                    <button onClick={() => updateFilter('completed')}>
                         Виконані
                     </button>
                 </div>

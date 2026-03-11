@@ -7,6 +7,8 @@ import {
     useDeleteTodoMutation,
     useGetUtilsQuery,
     useUpdateFilterMutation,
+    useClearTodosMutation,
+    useClearCompletedMutation,
 } from '../store/api/apiSlice.js';
 
 function TodoList() {
@@ -21,6 +23,8 @@ function TodoList() {
         error: utilsError,
     } = useGetUtilsQuery();
     const dispatch = useDispatch();
+    const [clearTodos] = useClearTodosMutation();
+    const [clearCompleted] = useClearCompletedMutation();
     const filterTodos =
         todos?.filter((item) => {
             if (utils?.filter === 'active') return !item.completed;
@@ -34,9 +38,7 @@ function TodoList() {
     return (
         <>
             <div className="filter-btn__container">
-                <button onClick={() => dispatch(resetTodo())}>
-                    Очистити список
-                </button>
+                <button onClick={() => clearTodos()}>Очистити список</button>
                 <button onClick={() => dispatch(clearCompleted())}>
                     Очистити виконані
                 </button>

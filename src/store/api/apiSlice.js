@@ -36,13 +36,62 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['Todos'], // оновлює список
         }),
+
         updateTodo: builder.mutation({
-            query: (id) => ({
+            query: ({ id, ...patch }) => ({
                 url: `todos/${id}`,
-                method: 'DELETE',
+                method: 'PATCH',
+                body: patch,
             }),
-            invalidatesTags: ['Todos'], // оновлює список
+            invalidatesTags: ['Todos'],
         }),
+        clearTodos: builder.mutation({
+            async queryFn(_, _queryApi, _extraOptions, fetchWithBQ) {
+                // отримати всі todos
+                const todosResult = await fetchWithBQ('todos');
+
+                if (todosResult.error) {
+                    return { error: todosResult.error };
+                }
+
+                const todos = todosResult.data;
+
+                // видалити кожен todo
+                await Promise.all(
+                    todos.map((todo) =>
+                        fetchWithBQ({
+                            url: `todos/${todo.id}`,
+                            method: 'DELETE',
+                        }),
+                    ),
+                );
+
+                return { data: null };
+            },
+            invalidatesTags: ['Todos'],
+        }),
+        clearCompleted: builder.mutation({
+            queryFn: async (_, _queryApi, _extraOptions, fetchWithBQ) => {
+                const todosResult = await fetchWithBQ('todos');
+
+                if (todosResult.error) return { error: todosResult.error };
+
+                const completed = todosResult.data.filter((t) => t.completed);
+
+                await Promise.all(
+                    completed.map((todo) =>
+                        fetchWithBQ({
+                            url: `todos/${todo.id}`,
+                            method: 'DELETE',
+                        }),
+                    ),
+                );
+
+                return { data: null };
+            },
+            invalidatesTags: ['Todos'],
+        }),
+
         // ------ Utils -------
         getUtils: builder.query({
             query: () => 'utils',
@@ -66,4 +115,7 @@ export const {
     useDeleteTodoMutation,
     useGetUtilsQuery,
     useUpdateFilterMutation,
+    useUpdateTodoMutation,
+    useClearTodosMutation,
+    useClearCompletedMutation,
 } = apiSlice;

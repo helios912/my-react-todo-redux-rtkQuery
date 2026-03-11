@@ -1,31 +1,5 @@
 {
-  "todos": [
-    {
-      "id": "43fefd8d-4eb1-4c09-a23b-9204e1ca38ad",
-      "text": "fdgdfgf",
-      "completed": false
-    },
-    {
-      "id": "daee2490-3dfe-4891-88d9-57efdd89eb02",
-      "text": "dfdfd",
-      "completed": true
-    },
-    {
-      "id": "a66a024d-5557-42da-bd96-a38fa739ccd9",
-      "text": "dfdfdf",
-      "completed": false
-    },
-    {
-      "id": "d559b93a-0d6d-47b4-9e86-e2e03f73ad6f",
-      "text": "vcv",
-      "completed": false
-    },
-    {
-      "id": "d57ff41d-d8c2-4195-9325-96cfc4e19fcc",
-      "text": "ddd",
-      "completed": false
-    }
-  ],
+  "todos": [],
   "utils": {
     "filter": "all"
   }

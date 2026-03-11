@@ -10,11 +10,13 @@ import {
     useDeleteTodoMutation,
     useGetUtilsQuery,
     useUpdateFilterMutation,
+    useUpdateTodoMutation,
 } from '../store/api/apiSlice.js';
 
 function TodoItem({ todo }) {
     const dispatch = useDispatch();
     const [deleteTodo] = useDeleteTodoMutation();
+    const [updateTodo] = useUpdateTodoMutation();
 
     return (
         <li className="todo-list__item">
@@ -27,12 +29,22 @@ function TodoItem({ todo }) {
                     {!todo.completed ? (
                         <FcCheckmark
                             style={{ fontSize: 35, paddingRight: 20 }}
-                            onClick={() => dispatch(toggleTodo(todo.id))}
+                            onClick={() =>
+                                updateTodo({
+                                    id: todo.id,
+                                    completed: !todo.completed,
+                                })
+                            }
                         />
                     ) : (
                         <FcExport
                             style={{ fontSize: 35, paddingRight: 20 }}
-                            onClick={() => dispatch(toggleTodo(todo.id))}
+                            onClick={() =>
+                                updateTodo({
+                                    id: todo.id,
+                                    completed: !todo.completed,
+                                })
+                            }
                         />
                     )}
 
